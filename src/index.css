@@ -27,7 +27,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
 h1 {
@@ -77,8 +77,6 @@ button:focus-visible {
   gap: 16px;
   /* controls scroll area height */
   height: 400px; 
-  /* height: 80%; */
-  /* width: 96%; */
 }
 
 
@@ -87,7 +85,6 @@ button:focus-visible {
   border: 1px solid #ccc;
   overflow-y: auto;
   padding: 8px;
-  /* width: 96%; */
 }
 
 .noteItem {

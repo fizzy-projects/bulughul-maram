@@ -35,46 +35,6 @@ function CompiledGallery(){
         }
     }, [imageList]);
 
-    // console.log(imageList);
-
-    // function DropdownMenu() {
-    //     return (
-    //         <div className="dropdown">
-    //             <button className="dropdown-btn">Navigate</button>
-
-    //             <div className="dropdown-content">
-    //                 <a href="/home">Home</a>
-    //                 <a href="/about">About</a>
-    //                 <a href="#section-2">Section 2</a>
-    //                 <a href="https://example.com" target="_blank">
-    //                 External
-    //                 </a>
-    //             </div>
-    //         </div>
-    //     );
-    // }
-
-
-
-    // async function fetchList(){
-    //     try {
-    //         const {data,error}= await supabase
-    //             .from('tblCompiledNotes')
-    //             .select(`root_base,root_meaning`,                    
-    //         )
-    //         if (error){
-    //             throw error;
-    //         }
-            
-    //         console.log(data);
-    //         console.log(error);
-    //         setWordList(data);
-    //     } 
-    //     catch(error){
-    //         console.error('Error fetching table', error);
-
-    //     }
-    // }
 
     
 
@@ -92,7 +52,7 @@ function CompiledGallery(){
                             <img
                                 src={img.imageUrl}
                                 alt={img.imageID}
-                                // width={350}
+                                width="100%"
                             />
                         </div>
                     ))}

@@ -11,10 +11,10 @@ function BulughulmaramPage(){
   const [refreshToggle,setRefreshToggle]=useState(false);
 
   return(
-  <div>
-    <div className='container'>
-      <CompiledGallery/>
-    </div>
+  <div className='container'>
+    {/* <div className='container'> */}
+    <CompiledGallery/>
+    {/* </div> */}
     {/* <AddHadithForm setRefreshToggle={setRefreshToggle}/>; */}
     
   </div>
