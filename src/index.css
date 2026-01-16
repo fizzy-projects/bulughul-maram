@@ -76,7 +76,7 @@ button:focus-visible {
   display: flex;
   gap: 16px;
   /* controls scroll area height */
-  height: 400px; 
+  height: 80vh; 
 }
 
 
