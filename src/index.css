@@ -68,9 +68,9 @@ button:focus-visible {
   }
 }
 
-.homepage {
+/* .homepage {
   width: 100vw;
-}
+} */
 
 .container {
   display: flex;
