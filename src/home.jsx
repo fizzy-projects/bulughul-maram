@@ -8,7 +8,10 @@ function Home(){
         <div>
             <h2>Hello</h2>
             <h6>Compendium of notes available:</h6>
-            <button onClick={() => navigate("/bulughul-maram/bulughulmaram")}>
+            {/* <button onClick={() => navigate("/bulughul-maram/bulughulmaram")}>
+                Bulughul Maram
+            </button> */}
+            <button onClick={() => navigate("/bulughul-maram")}>
                 Bulughul Maram
             </button>
         </div>

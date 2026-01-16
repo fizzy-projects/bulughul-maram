@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Home from './home.jsx';
 import BulughulmaramPage from './bulughulmaram/bulughulmaramPage.jsx';
@@ -16,8 +16,11 @@ function App(){
     {/* <BulughulmaramPage/> */}
     <BrowserRouter>
       <Routes>
-        <Route path="/bulughul-maram" element={<Home/>} />
-        <Route path="/bulughul-maram/bulughulmaram" element={<BulughulmaramPage/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/bulughul-maram" element={<BulughulmaramPage/>} />
+        
+        {/* <Route path="/bulughul-maram" element={<Home/>} /> */}
+        {/* <Route path="/bulughul-maram/bulughulmaram" element={<BulughulmaramPage/>} /> */}
       </Routes>
     </BrowserRouter>
 
