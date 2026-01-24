@@ -5,10 +5,14 @@ import { useAuth } from "./AuthContext";
 
 function ProtectedRoute() {
   const { user, loading } = useAuth();
-  if (loading) return <Spinner />;
+  console.log('This is ProtectedRoute.')
+  // if (loading) return <Spinner />;
+  if (loading){
+    return <div>Loading...</div>;
+  }
 
   if (!user) {
-    return <Navigate to="/signin" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;

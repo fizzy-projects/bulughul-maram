@@ -8,7 +8,7 @@ function Home(){
         <div className="homepage">
             <h1>Hello</h1>
             <div>
-                <button onClick={() => navigate("/baamarabic")}>
+                <button onClick={() => navigate("/arabic")}>
                     BAAM Arabic
                 </button>
             </div>

@@ -9,9 +9,9 @@ function BulughulmaramPage(){
   // <div className='container'></div>
 
   return(
-    <div className='container'>
+    <div>
       <ProtectedComponent>
-        <AddHadithForm setRefreshToggle={setRefreshToggle}/>;
+        <AddHadithForm setRefreshToggle={setRefreshToggle}/>
       </ProtectedComponent>
       <CompiledGallery/>
     </div>

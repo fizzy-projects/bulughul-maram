@@ -1,7 +1,8 @@
 import { useState } from "react";
 import supabase from "../../../admin/supabase-client";
+import ProtectedComponent from "../../../admin/ProtectedComponent";
 
-function AddWordMeaning() {
+function AddWordDetails() {
   const [newWord, setNewWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [bookName, setBookName] = useState("")
@@ -31,9 +32,9 @@ function AddWordMeaning() {
   }
   const upsertStoryWords = async()=>{
     const numericStoryNumber = Number(storyNumber);
-    console.log("upserting Story Words.")
-    console.log(`bookName: ${bookName}, storyNumber: ${storyNumber}, word: ${newWord}`);
-    console.log(numericStoryNumber);
+    // console.log("upserting Story Words.")
+    // console.log(`bookName: ${bookName}, storyNumber: ${storyNumber}, word: ${newWord}`);
+    // console.log(numericStoryNumber);
     const {error} = await supabase
                                 .from("baam_story_words")
                                 .upsert({bookName:bookName,storyNumber:numericStoryNumber,word:newWord})
@@ -89,7 +90,7 @@ function AddWordMeaning() {
 
     alert("Word details added successfully!")
     setNewWord("");
-    // setMeaning("");
+    setMeaning("");
     // setBookName("");
     // setStoryNumber(0);
     setIsUpdating(false);
@@ -97,55 +98,59 @@ function AddWordMeaning() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <ProtectedComponent>
       <div>
-        <label>BookName: </label>
-        <input
-          type="text"
-          value={bookName}
-          onChange={(e) => {isUpdating? null : setBookName(e.target.value)}}
-          disabled={isUpdating}
-        />
-      </div>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>BookName: </label>
+            <input
+              type="text"
+              value={bookName}
+              onChange={(e) => {isUpdating? null : setBookName(e.target.value)}}
+              disabled={isUpdating}
+            />
+          </div>
 
-      <div>
-        <label>StoryNumber: </label>
-        <input
-          type="number"
-          value={storyNumber}
-          onChange={(e) => {isUpdating? null : setStoryNumber(e.target.value)}}
-          disabled={isUpdating}
-        />
-      </div>
+          <div>
+            <label>StoryNumber: </label>
+            <input
+              type="number"
+              value={storyNumber}
+              onChange={(e) => {isUpdating? null : setStoryNumber(e.target.value)}}
+              disabled={isUpdating}
+            />
+          </div>
 
-      <div>
-        <label>Word: </label>
-        <input
-          type="text"
-          value={newWord}
-          placeholder="...فعل"
-          onChange={(e) => {isUpdating? null: setNewWord(e.target.value)}}
-          disabled={isUpdating}
-          required
-        />
-      </div>
+          <div>
+            <label>Word: </label>
+            <input
+              type="text"
+              value={newWord}
+              placeholder="...فعل"
+              onChange={(e) => {isUpdating? null: setNewWord(e.target.value)}}
+              disabled={isUpdating}
+              required
+            />
+          </div>
 
-      <div>
-        <label>Meaning: </label>
-        <input
-          type="text"
-          value={meaning}
-          onChange={(e) => {isUpdating? null : setMeaning(e.target.value)}}
-          placeholder="Do..."
-          disabled={isUpdating}
-        />
-      </div>
+          <div>
+            <label>Meaning: </label>
+            <input
+              type="text"
+              value={meaning}
+              onChange={(e) => {isUpdating? null : setMeaning(e.target.value)}}
+              placeholder="Do..."
+              disabled={isUpdating}
+            />
+          </div>
 
-      <button type="submit" disabled={isUpdating}>
-        {isUpdating ? "Adding..." : "Add"}
-      </button>
-    </form>
+          <button type="submit" disabled={isUpdating}>
+            {isUpdating ? "Adding..." : "Add"}
+          </button>
+        </form>
+      </div>
+    </ProtectedComponent>
   )
 }
 
-export default AddWordMeaning;
+export default AddWordDetails;

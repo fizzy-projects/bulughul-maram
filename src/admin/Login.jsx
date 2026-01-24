@@ -15,7 +15,7 @@ function Login() {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log("handleSubmit function.");
+        // console.log("handleSubmit function.");
         const {data,error} = await supabase.auth.signInWithPassword({
                                                     email:email,
                                                     password:password});

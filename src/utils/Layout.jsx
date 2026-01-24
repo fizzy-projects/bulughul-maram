@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 function Layout( {includeHeader=false} ) {
   return (
-    <>
+    <div>
       
       {includeHeader && 
         <div>
@@ -12,13 +12,11 @@ function Layout( {includeHeader=false} ) {
               <Link to="/login">Admin</Link> |{" "}
             </nav>
           </header>
-          {/* <main style={{ padding: "1rem" }}>
-            <Outlet />
-          </main> */}
-      </div>}
+      </div>
+      }
       
       <Outlet/>
-    </>
+    </div>
 
   );
 }
