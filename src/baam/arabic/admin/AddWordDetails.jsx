@@ -34,8 +34,8 @@ function AddWordDetails() {
     fetchList({tableName:"baam_words",columnName:"word",setState:setListWords});
     // Sets up Realtime subscription for the updating lists
     const subscription=createSupabaseChannel({handlers:[
-        {table:"baam_sources",setState:setListWords},
-        {table:"baam_words",setState:setListBooks}
+        {table:"baam_sources",setState:setListBooks},
+        {table:"baam_words",setState:setListWords}
     ]});
     subscription.subscribe();
 
