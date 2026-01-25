@@ -1,13 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../../../admin/supabase-client";
+import createSupabaseChannel from "../../../utils/createSupabaseChannel";
 import ProtectedComponent from "../../../admin/ProtectedComponent";
+// import CreatableSelect from "react-select/creatable";
+import AutocompleteInput from "../../../utils/AutoCompleteInput";
 
 function AddWordDetails() {
+  // List states mirroring database entries
+  const [listBooks,setListBooks]=useState([]);
+  const [listWords,setListWords]=useState([]);
+  // Form input states
   const [newWord, setNewWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [bookName, setBookName] = useState("")
   const [storyNumber, setStoryNumber] = useState("");
+  // Form control states
   const [isUpdating, setIsUpdating] = useState(false);
+  // Form autocomplete selections
+  const [bookSelected,setBookSelected]=useState(null);
+  const [wordSelected,setWordSelected]=useState(null);
+
+  useEffect(()=>{
+    // Fetches initial lists for books and words
+    const fetchList = async ({tableName,columnName,setState}) => {
+      const {data,error} = await supabase.from(tableName).select(columnName);
+      if (error){
+        console.error(error);
+        alert(error);
+      } else {
+        setState(data);
+      }
+    }
+    fetchList({tableName:"baam_sources",columnName:"source",setState:setListBooks});
+    fetchList({tableName:"baam_words",columnName:"word",setState:setListWords});
+    // Sets up Realtime subscription for the updating lists
+    const subscription=createSupabaseChannel({handlers:[
+        {table:"baam_sources",setState:setListWords},
+        {table:"baam_words",setState:setListBooks}
+    ]});
+    subscription.subscribe();
+
+    // Unmounts to prevent memory leakage
+    return () => {
+        supabase.removeChannel(subscription); // cleanup on unmount
+    };
+  },[])
 
   const upsertWord = async()=>{
     const {error} = await supabase
@@ -32,9 +69,6 @@ function AddWordDetails() {
   }
   const upsertStoryWords = async()=>{
     const numericStoryNumber = Number(storyNumber);
-    // console.log("upserting Story Words.")
-    // console.log(`bookName: ${bookName}, storyNumber: ${storyNumber}, word: ${newWord}`);
-    // console.log(numericStoryNumber);
     const {error} = await supabase
                                 .from("baam_story_words")
                                 .upsert({bookName:bookName,storyNumber:numericStoryNumber,word:newWord})
@@ -97,11 +131,14 @@ function AddWordDetails() {
     // setRefreshToggle((prev) => !prev);
   };
 
+
+
   return (
     <ProtectedComponent>
       <div>
-        <form onSubmit={handleSubmit}>
-          <div>
+        <form onSubmit={handleSubmit} className="product-form">
+          
+          {/* <div>
             <label>BookName: </label>
             <input
               type="text"
@@ -109,7 +146,30 @@ function AddWordDetails() {
               onChange={(e) => {isUpdating? null : setBookName(e.target.value)}}
               disabled={isUpdating}
             />
+          </div> */}
+          
+          <div>
+            <AutocompleteInput
+                labelText="BookName:"
+                items={listBooks.map(row=>row.source)}
+                transformItem={(c) => c}
+                value={bookName}
+                // onChange={(val) => {
+                //   setBookName(val);
+                //   setBookSelected(null);
+                // }}
+                onChangeFunc={(e) => {
+                  setBookName(e.target.value);
+                  setBookSelected("");
+                }}
+                onSelectFunc={(transformedItem) => {
+                  setBookName(transformedItem);
+                  setBookSelected(transformedItem);
+                }}
+                placeholder="Type the source of the word"
+            />
           </div>
+
 
           <div>
             <label>StoryNumber: </label>
