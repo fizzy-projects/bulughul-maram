@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./AutoCompleteInput.css"
+import styles from "./AutoCompleteInput.module.css"
 
 function useAutocomplete(items, transformItem, value) {
     const [filtered, setFiltered] = useState([]);
@@ -37,38 +37,40 @@ function AutocompleteInput({
 
 
     return (
-        <div className="autocomplete">
-            {labelText && <label>{labelText}</label>}
-            <input
-                className="autocomplete-input"
-                value={value}
-                // onChange={(e) => onChange(e.target.value)}
-                onChange={(e)=>{
-                    onChangeObjects.setState(e.target.value);
-                    setIsOpen(true);
+        <div className={styles.row}>
+            {labelText && <label className={styles.label}>{labelText}</label>}
+            <div className={styles.autocompleteDiv}>
+                <input
+                    className={styles.autocompleteInput}
+                    value={value}
+                    // onChange={(e) => onChange(e.target.value)}
+                    onChange={(e)=>{
+                        onChangeObjects.setState(e.target.value);
+                        setIsOpen(true);
+                        }
                     }
-                }
-                placeholder={placeholder}
-                disabled={disableCondition}
-            />
+                    placeholder={placeholder}
+                    disabled={disableCondition}
+                />
 
-            {isOpen && filtered.length > 0 && (
-                <ul className="autocomplete-list">
-                {filtered.map((transformedItem) => ( // Filtered is usually a list of values, not a list of rows of values. So an item is a value.
-                    <li
-                    key={transformedItem}
-                    className="autocomplete-item"
-                    onClick={() => {//console.log("this is onClick function"); 
-                                    onSelectFunc(transformedItem);
-                                    setIsOpen(false);
-                                    }
-                            }
-                    >
-                    {transformedItem}
-                    </li>
-                ))}
-                </ul>
-            )}
+                {isOpen && filtered.length > 0 && (
+                    <ul className={styles.autocompleteList}>
+                    {filtered.map((transformedItem) => ( // Filtered is usually a list of values, not a list of rows of values. So an item is a value.
+                        <li
+                        key={transformedItem}
+                        className={styles["autocompleteItem"]}
+                        onClick={() => {//console.log("this is onClick function"); 
+                                        onSelectFunc(transformedItem);
+                                        setIsOpen(false);
+                                        }
+                                }
+                        >
+                        {transformedItem}
+                        </li>
+                    ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }

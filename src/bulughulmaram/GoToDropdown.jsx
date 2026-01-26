@@ -23,7 +23,7 @@ function GoToDropdown({imageList}){
                 </option> */}
                 {
                     imageList.map(item => (
-                        <option key={item.imageID} value={item.hadithNumber}>{item.hadithNumber}</option>
+                        <option key={item.imageID} value={item.imageID}>{item.imageID}</option>
                     ))
                 }
             </select>

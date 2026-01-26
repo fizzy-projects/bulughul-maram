@@ -3,6 +3,7 @@ import supabase from "../../../admin/supabase-client";
 import createSupabaseChannel from "../../../utils/createSupabaseChannel";
 import ProtectedComponent from "../../../admin/ProtectedComponent";
 import AutocompleteInput from "../../../utils/AutoCompleteInput";
+import styles from "../../../utils/AutoCompleteInput.module.css"
 
 function AddWordDetails() {
   // List states mirroring database entries
@@ -15,9 +16,6 @@ function AddWordDetails() {
   const [storyNumber, setStoryNumber] = useState("");
   // Form control states
   const [isUpdating, setIsUpdating] = useState(false);
-  // Form autocomplete selections
-  // const [bookSelected,setBookSelected]=useState(null);
-  // const [wordSelected,setWordSelected]=useState(null);
 
   useEffect(()=>{
     // Fetches initial lists for books and words
@@ -138,8 +136,10 @@ function AddWordDetails() {
 
   return (
     <ProtectedComponent>
-      <div>
-        <form onSubmit={handleSubmit} className="product-form">
+      <div style={{marginTop:"2rem", width:"90vw"}}>
+        <form onSubmit={handleSubmit} className="product-form" 
+        style={{width:"100%", display:"flex", flexDirection:"column", gap:"0.3rem"}}
+        >
           
             <AutocompleteInput
                 labelText="BookName:"
@@ -157,9 +157,11 @@ function AddWordDetails() {
             />
 
 
-          <div>
+          <div className={styles.row}>
             <label>StoryNumber: </label>
             <input
+              className={styles.autocompleteDiv}
+              style={{padding:"8px",boxSizing:"border-box"}}
               type="number"
               value={storyNumber}
               onChange={(e) => setStoryNumber(e.target.value)}
@@ -182,9 +184,11 @@ function AddWordDetails() {
                 placeholder="Type the word to be added"
             />
 
-          <div>
+          <div className={styles.row}>
             <label>Meaning: </label>
             <input
+              className={styles.autocompleteDiv}
+              style={{padding:"8px",boxSizing:"border-box"}}
               type="text"
               value={meaning}
               onChange={(e) => setMeaning(e.target.value)}
@@ -193,7 +197,8 @@ function AddWordDetails() {
             />
           </div>
 
-          <button type="submit" disabled={isUpdating}>
+          <button type="submit" disabled={isUpdating}
+          style={{alignSelf:"center", marginTop:"0.5rem",padding:"0.6rem",width:"30%"}}>
             {isUpdating ? "Adding..." : "Add"}
           </button>
         </form>

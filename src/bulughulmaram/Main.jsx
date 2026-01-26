@@ -6,7 +6,6 @@ import ProtectedComponent from '../admin/ProtectedComponent.jsx';
 
 function BulughulmaramPage(){
   const [refreshToggle,setRefreshToggle]=useState(false);
-  // <div className='container'></div>
 
   return(
     <div>

@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 export default function ArabicHome(){
     const navigate=useNavigate();
     return(
-        <div className="homepage">
+        <div className="mainBody" 
+        style={{gap:"0.5rem", marginTop:"4rem",display:"flex", flexDirection:"column"}}
+        >
             <div>
                 <button onClick={() => navigate("/arabic/list")}>
                     Arabic Words

@@ -3,8 +3,6 @@ import { useEffect,useState } from "react";
 import GoToDropdown from "./GoToDropdown";
 
 function CompiledGallery(){
-    const [wordList,setWordList] = useState([]);
-    const [refreshToggle,setRefreshToggle]=useState(false);
     const [imageList,setImageList]=useState([]);
 
     useEffect(() => {
@@ -20,7 +18,6 @@ function CompiledGallery(){
             setImageList(data);
             };
         fetchList();
-        // console.log(imageList);
     }, []);
 
     useEffect(() => {
@@ -41,21 +38,15 @@ function CompiledGallery(){
     return(
         <div>
             <GoToDropdown imageList={imageList}/>
-            <div className="container">
-                <div className="list">
-                    {/* <h1>Image List</h1> */}
-                    {imageList.map((img,i) => (
-                        <div
-                        className="noteItem"
-                        id={img.hadithNumber}
-                        key={img.imageID}>
-                            <img
-                                src={img.imageUrl}
-                                alt={img.imageID}
-                            />
-                        </div>
-                    ))}
-                </div>
+            <div className="galleryContainer" style={{height:"65vh", width:"80vw"}}>
+                {imageList.map((img,i) => (
+                    <img
+                        id={img.imageID}
+                        key={img.imageID}
+                        src={img.imageUrl}
+                        alt={img.imageID}
+                    />
+                ))}
             </div>
             
         </div>

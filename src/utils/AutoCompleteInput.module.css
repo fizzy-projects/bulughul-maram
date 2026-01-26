@@ -1,0 +1,46 @@
+.row {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.row>label{
+  width: 34%;
+  padding-right: 0.5rem;
+  text-align: right;
+}
+.row>.autocompleteDiv{
+  position: relative;;
+  width:50%;
+  /* overflow-x: auto; */
+}
+
+.autocompleteDiv > .autocompleteInput {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.autocompleteDiv > .autocompleteList {
+  position: absolute; 
+  top: 100%;
+  left: 0;
+  right: 0;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 10;
+}
+
+.autocompleteItem {
+  width: 100%;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.autocompleteItem:hover {
+  background: #f2f2f2;
+}
